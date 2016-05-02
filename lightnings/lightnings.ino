@@ -39,7 +39,7 @@ uint8_t ledlen;                                               // Length of a fla
 
 void setup() {
   delay(1000);                                                // allows reprogramming if accidently blowing power w/leds
-  LEDS.addLeds<LED_TYPE, LED_DT, COLOR_ORDER>(leds, NUM_LEDS);  // Use this for WS2812
+  LEDS.addLeds<LED_TYPE, LED_DT, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(OvercastSky);  // Use this for WS2812
 //  LEDS.addLeds<LED_TYPE, LED_DT, LED_CK, COLOR_ORDER>(leds, NUM_LEDS);  // Use this for WS2801 or APA102
   FastLED.setBrightness(max_bright);
 } // setup()

@@ -6,6 +6,10 @@
 //
 //  This modified version creates lightning along various sections of the strip. Looks great inside my poly fill constructed cloud.
 //
+/* edited for nodeMCU with arduino IDE by @genewitch
+    pin 2 is D2 on my nodeMCU for this sketch
+*/
+
 
 #include "FastLED.h"
 
@@ -14,14 +18,14 @@
 #endif
 
 // Fixed definitions cannot change on the fly.
-#define LED_DT 12                                             // Data pin to connect to the strip.
-#define LED_CK 11                                             // Clock pin for WS2801 or APA102.
-#define COLOR_ORDER BGR                                       // It's GRB for WS2812 and BGR for APA102.
-#define LED_TYPE APA102                                       // Using APA102, WS2812, WS2801. Don't forget to change LEDS.addLeds.
-#define NUM_LEDS 20                                           // Number of LED's.
+#define LED_DT 2                                             // Dpin 2 is D2 on my nodeMCU
+#define LED_CK 11                                             // Irrelevant
+#define COLOR_ORDER GRB                                       // It's GRB for WS2812 named below
+#define LED_TYPE WS2812B                                       //  WS2812B 5050 RGB LED Strip     
+#define NUM_LEDS 144                                           // Number of LEDs.
 
 // Global variables can be changed on the fly.
-uint8_t max_bright = 128;                                      // Overall brightness definition. It can be changed on the fly.
+uint8_t max_bright = 7;                                      // Overall brightness definition. It can be changed on the fly.
 
 struct CRGB leds[NUM_LEDS];                                   // Initialize our LED array.
 
@@ -35,8 +39,8 @@ uint8_t ledlen;                                               // Length of a fla
 
 void setup() {
   delay(1000);                                                // allows reprogramming if accidently blowing power w/leds
-//  LEDS.addLeds<LED_TYPE, LED_DT, COLOR_ORDER>(leds, NUM_LEDS);  // Use this for WS2812
-  LEDS.addLeds<LED_TYPE, LED_DT, LED_CK, COLOR_ORDER>(leds, NUM_LEDS);  // Use this for WS2801 or APA102
+  LEDS.addLeds<LED_TYPE, LED_DT, COLOR_ORDER>(leds, NUM_LEDS);  // Use this for WS2812
+//  LEDS.addLeds<LED_TYPE, LED_DT, LED_CK, COLOR_ORDER>(leds, NUM_LEDS);  // Use this for WS2801 or APA102
   FastLED.setBrightness(max_bright);
 } // setup()
 

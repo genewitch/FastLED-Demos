@@ -21,15 +21,15 @@ This takes my one_sine routine and adds Mark's palette lookup to it.
 #endif
 
 // Fixed definitions cannot change on the fly.
-#define LED_DT 12                                             // Serial data pin for WS2812 or WS2801.
+#define LED_DT 2                                             // Serial data pin for WS2812 or WS2801.
 #define LED_CK 11                                             // Serial clock pin for WS2801 or APA102.
-#define COLOR_ORDER BGR                                       // Are they GRB for WS2812 and GBR for APA102
-#define LED_TYPE APA102                                       // What kind of strip are you using? WS2812, APA102. . .
-#define NUM_LEDS 20                                           // Number of LED's.
+#define COLOR_ORDER GRB                                       // Are they GRB for WS2812 and GBR for APA102
+#define LED_TYPE WS2812B                                       // What kind of strip are you using? WS2812, APA102. . .
+#define NUM_LEDS 144                                           // Number of LED's.
 
 struct CRGB leds[NUM_LEDS];                                   // Initialize our LED array.
 
-uint8_t max_bright = 128;                                     // Overall brightness definition. It can be changed on the fly.
+uint8_t max_bright = 7;                                     // Overall brightness definition. It can be changed on the fly.
 
 
 // Initialize changeable global variables. Play around with these!!!
@@ -54,8 +54,8 @@ TBlendType    currentBlending;
 void setup() {
   Serial.begin(57600);
 
-  LEDS.addLeds<LED_TYPE, LED_DT, LED_CK, COLOR_ORDER>(leds, NUM_LEDS);   //WS2801 and APA102
-//  LEDS.addLeds<LED_TYPE, LED_DT,COLOR_ORDER>(leds, NUM_LEDS);   // WS2812
+//  LEDS.addLeds<LED_TYPE, LED_DT, LED_CK, COLOR_ORDER>(leds, NUM_LEDS);   //WS2801 and APA102
+  LEDS.addLeds<LED_TYPE, LED_DT,COLOR_ORDER>(leds, NUM_LEDS);   // WS2812
 
   FastLED.setBrightness(max_bright);
 
